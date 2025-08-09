@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Assets/styles.css">
+    <title>Invoice Management Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = {darkMode: 'media'}</script>
+
+</head>
+
+<body class="h-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div class="min-h-full p-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-6">
+                <h1 class="text-3xl font-bold mb-4">Invoice Management Tool</h1>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 mb-4">
+                    <div class="text-lg font-semibold">
+                        Total Monthly: Php <span id="totalMonthly" class="text-blue-600 dark:text-green-400">0.00</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mb-4">
+                    <button id="exportBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+                        Export JSON
+                    </button>
+                    <label class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors cursor-pointer">
+                        Import JSON
+                        <input type="file" id="importFile" class="hidden" accept=".json">
+                    </label>
+                </div>
+            </div>
+
+            <div class="border-b border-gray-200 dark:border-gray-700 mb-4">
+                <nav class="flex space-x-8">
+                    <button id="equipmentTab" class="tab-button active py-2 px-1 border-b-2 font-medium text-sm">
+                        Equipment List
+                    </button>
+                    <div id="customTabs" class="flex space-x-8"></div>
+                    <button id="addTabBtn" class="py-2 px-3 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        + Add Tab
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Tab -->
+            <div id="tabContent" class="bg-white dark:bg-gray-800 rounded-lg shadow">
+                <!-- Equipment List Tab -->
+                <div id="equipmentContent" class="tab-content p-6">
+                    <h2 class="text-xl font-semibold mb-4">Equipment List</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th class="text-left py-3 px-2">Name</th>
+                                    <th class="text-left py-3 px-2">Supplier</th>
+                                    <th class="text-left py-3 px-2">Price (Php)</th>
+                                    <th class="text-left py-3 px-2">Date</th>
+                                    <th class="text-left py-3 px-2">Months Amortization</th>
+                                    <th class="text-left py-3 px-2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="equipmentTable">
+                                <tr>
+                                    <td><input type="text" class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" placeholder="Equipment name"></td>
+                                    <td><input type="text" class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" placeholder="Supplier"></td>
+                                    <td><input type="number" step="0.01" class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" placeholder="0.00"></td>
+                                    <td><input type="date" class="date-text w-full p-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" placeholder="MM/DD/YYYY"></td>
+                                    <td><input type="number" class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" placeholder="12"></td>
+                                    <td><button class="remove-btn px-2 py-1 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-200" style="display:none;">Remove</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Tab Modal -->
+    <div id="addTabModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h3 class="text-lg font-semibold mb-4">Add New Tab</h3>
+            <input type="text" id="tabNameInput" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 mb-4" placeholder="Tab name">
+            <div class="flex gap-2">
+                <button id="confirmAddTab" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add</button>
+                <button id="cancelAddTab" class="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded hover:bg-gray-400 dark:hover:bg-gray-500">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+<script src="/Assets/script.js"></script>
+
+</body>
+</html>
