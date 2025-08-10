@@ -1,34 +1,76 @@
 .tab-button.active {
-    border-color: rgb(59 130 246);
-    color: rgb(37 99 235);
-    }
+            border-color: rgb(59 130 246);
+            color: rgb(37 99 235);
+        }
 
-.tab-button {
-    border-color: transparent;
-    color: rgb(107 114 128);
-}
+        .tab-button {
+            border-color: transparent;
+            color: rgb(107 114 128);
+        }
 
-.tab-button:hover {
-    color: rgb(55 65 81);
-    border-color: rgb(209 213 219);
-}
+        .tab-button:hover {
+            color: rgb(55 65 81);
+            border-color: rgb(209 213 219);
+        }
 
-@media (prefers-color-scheme: dark) {
-.tab-button.active {
-    color: rgb(96 165 250);
-}
+        @media (prefers-color-scheme: dark) {
+            .tab-button.active {
+                color: rgb(96 165 250);
+            }
 
-.tab-button {
-    color: rgb(156 163 175);
-}
+            .tab-button {
+                color: rgb(156 163 175);
+            }
 
-.tab-button:hover {
-    color: rgb(229 231 235);
-}
-}
+            .tab-button:hover {
+                color: rgb(229 231 235);
+            }
+        }
 
-.date-text{
-    font-size: 15px;
-    padding: 4px;
-    color: rgb(156, 163, 175);
-}
+        .date-text {
+            font-size: 15px;
+            padding: 4px;
+            color: rgb(156, 163, 175);
+        }
+
+        /* Mobile table scroll indicator */
+        .table-container {
+            position: relative;
+        }
+
+        .table-container::after {
+            content: "→ Scroll";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(59, 130, 246, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .table-container::after {
+                opacity: 1;
+            }
+        }
+
+        /* Hide scroll indicator when scrolled */
+        .table-scrolled::after {
+            opacity: 0;
+        }
+
+        /* Mobile optimized inputs */
+        @media (max-width: 640px) {
+            input[type="text"],
+            input[type="number"],
+            input[type="date"],
+            select {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }

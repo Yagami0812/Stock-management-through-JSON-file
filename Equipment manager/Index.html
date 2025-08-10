@@ -3,93 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Assets/styles.css">
     <title>Invoice Management Tool</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = {darkMode: 'media'}</script>
-
 </head>
 
+
+
 <body class="h-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-    <div class="min-h-full p-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="mb-6">
-                <h1 class="text-3xl font-bold mb-4">Invoice Management Tool</h1>
+<!-- Dark Mode -->
+<button id="darkModeToggle" class="fixed top-4 right-4 z-50 p-2 sm:p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+    <span id="darkModeIcon" class="text-xl">🌙</span>
+    <span class="sr-only" id="darkModeText">Dark Mode</span>
+</button>
+<div class="min-h-full p-2 sm:p-4 lg:p-6">
+    <div class="max-w-7xl mx-auto">
 
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 mb-4">
-                    <div class="text-lg font-semibold">
-                        Total Monthly: Php <span id="totalMonthly" class="text-blue-600 dark:text-green-400">0.00</span>
-                    </div>
-                </div>
+        <div class="mb-4 sm:mb-6">
+            <h1 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Invoice Management Tool</h1>
 
-                <div class="flex gap-2 mb-4">
-                    <button id="exportBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
-                        Export JSON
-                    </button>
-                    <label class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors cursor-pointer">
-                        Import JSON
-                        <input type="file" id="importFile" class="hidden" accept=".json">
-                    </label>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-3 sm:p-4 mb-3 sm:mb-4">
+                <div class="text-base sm:text-lg font-semibold text-center sm:text-left">
+                    Total Monthly: ₱<span id="totalMonthly" class="text-blue-600 dark:text-green-400">0.00</span>
                 </div>
             </div>
-
-            <div class="border-b border-gray-200 dark:border-gray-700 mb-4">
-                <nav class="flex space-x-8">
-                    <button id="equipmentTab" class="tab-button active py-2 px-1 border-b-2 font-medium text-sm">
-                        Equipment List
-                    </button>
-                    <div id="customTabs" class="flex space-x-8"></div>
-                    <button id="addTabBtn" class="py-2 px-3 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                        + Add Tab
-                    </button>
-                </nav>
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row gap-2 mb-3 sm:mb-4">
+                <button id="exportBtn" class="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm sm:text-base">
+                    Export JSON
+                </button>
+                <label class="w-full sm:w-auto px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors cursor-pointer text-center text-sm sm:text-base">
+                    Import JSON
+                    <input type="file" id="importFile" class="hidden" accept=".json">
+                </label>
             </div>
-
-            <!-- Tab -->
-            <div id="tabContent" class="bg-white dark:bg-gray-800 rounded-lg shadow">
-                <!-- Equipment List Tab -->
-                <div id="equipmentContent" class="tab-content p-6">
-                    <h2 class="text-xl font-semibold mb-4">Equipment List</h2>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full">
-                            <thead>
-                                <tr class="border-b border-gray-200 dark:border-gray-700">
-                                    <th class="text-left py-3 px-2">Name</th>
-                                    <th class="text-left py-3 px-2">Supplier</th>
-                                    <th class="text-left py-3 px-2">Price (Php)</th>
-                                    <th class="text-left py-3 px-2">Date</th>
-                                    <th class="text-left py-3 px-2">Months Amortization</th>
-                                    <th class="text-left py-3 px-2">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="equipmentTable">
-                                <tr>
-                                    <td><input type="text" class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" placeholder="Equipment name"></td>
-                                    <td><input type="text" class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" placeholder="Supplier"></td>
-                                    <td><input type="number" step="0.01" class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" placeholder="0.00"></td>
-                                    <td><input type="date" class="date-text w-full p-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" placeholder="MM/DD/YYYY"></td>
-                                    <td><input type="number" class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700" placeholder="12"></td>
-                                    <td><button class="remove-btn px-2 py-1 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-200" style="display:none;">Remove</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        </div>
+        <!-- Nav -->
+        <div class="border-b border-gray-200 dark:border-gray-700 mb-4">
+            <nav class="flex space-x-4 sm:space-x-8 overflow-x-auto">
+                <button id="equipmentTab" class="tab-button active py-2 px-2 sm:px-1 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap">
+                    Equipment List
+                </button>
+                <div id="customTabs" class="flex space-x-4 sm:space-x-8"></div>
+                <button id="addTabBtn" class="py-2 px-2 sm:px-3 text-xs sm:text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 whitespace-nowrap">
+                    + Add Tab
+                </button>
+            </nav>
+        </div>
+        <!-- Tabs-->
+        <div id="tabContent" class="bg-white dark:bg-gray-800 rounded-lg shadow">
+            <!-- Equipment Tab-->
+            <div id="equipmentContent" class="tab-content p-3 sm:p-4 lg:p-6">
+                <h2 class="text-lg sm:text-xl font-semibold mb-4">Equipment List</h2>
+                <div class="table-container overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="border-b border-gray-200 dark:border-gray-700">
+                                <th class="text-left py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm min-w-32">Name</th>
+                                <th class="text-left py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm min-w-28">Supplier</th>
+                                <th class="text-left py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm min-w-24">Price (₱)</th>
+                                <th class="text-left py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm min-w-32">Date</th>
+                                <th class="text-left py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm min-w-20">Months</th>
+                                <th class="text-left py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm min-w-20">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="equipmentTable">
+                            <tr>
+                                <td class="py-1 px-1 sm:px-2"><input type="text" class="w-full min-w-28 p-1 sm:p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-xs sm:text-sm" placeholder="Equipment name"></td>
+                                <td class="py-1 px-1 sm:px-2"><input type="text" class="w-full min-w-24 p-1 sm:p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-xs sm:text-sm" placeholder="Supplier"></td>
+                                <td class="py-1 px-1 sm:px-2"><input type="number" step="0.01" class="w-full min-w-20 p-1 sm:p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-xs sm:text-sm" placeholder="0.00"></td>
+                                <td class="py-1 px-1 sm:px-2"><input type="date" class="date-text w-full min-w-28 p-1 sm:p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-xs sm:text-sm" placeholder="MM/DD/YYYY"></td>
+                                <td class="py-1 px-1 sm:px-2"><input type="number" class="w-full min-w-16 p-1 sm:p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-xs sm:text-sm" placeholder="12"></td>
+                                <td class="py-1 px-1 sm:px-2"><button class="remove-btn px-2 py-1 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-200 text-xs sm:text-sm" style="display:none;">Remove</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Add Tab Modal -->
-    <div id="addTabModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-            <h3 class="text-lg font-semibold mb-4">Add New Tab</h3>
-            <input type="text" id="tabNameInput" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 mb-4" placeholder="Tab name">
-            <div class="flex gap-2">
-                <button id="confirmAddTab" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add</button>
-                <button id="cancelAddTab" class="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded hover:bg-gray-400 dark:hover:bg-gray-500">Cancel</button>
-            </div>
+</div>
+<!-- Add Tab Modal -->
+<div id="addTabModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h3 class="text-lg font-semibold mb-4">Add New Tab</h3>
+        <input type="text" id="tabNameInput" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 mb-4 text-sm sm:text-base" placeholder="Tab name">
+        <div class="flex flex-col sm:flex-row gap-2">
+            <button id="confirmAddTab" class="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm sm:text-base">Add</button>
+            <button id="cancelAddTab" class="w-full sm:w-auto px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded hover:bg-gray-400 dark:hover:bg-gray-500 text-sm sm:text-base">Cancel</button>
         </div>
     </div>
+</div>
 
 <script src="/Assets/script.js"></script>
 
